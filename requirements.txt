@@ -1,0 +1,3 @@
+aiocoap==0.4.3
+asyncio==3.4.3
+paho-mqtt==1.6.1
