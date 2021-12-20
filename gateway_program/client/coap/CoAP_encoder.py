@@ -1,4 +1,5 @@
 from . import CoAP_binary
+import random
 
 def build_packet(
     method: str,
@@ -24,7 +25,10 @@ def build_packet(
     packet += method
 
     # Message ID
-    message_id = "0000000000000000"
+    message_id = ""
+    for _ in range(16): # Generate random message ID's
+        message_id += str(random.randint(0, 1))
+    #message_id = "0000000000000000"
     packet += message_id
 
     # Option delta & option delta extended

@@ -27,7 +27,7 @@ class client():
         try:
             recieved_data = self.client_socket.recv(1024)
         except TimeoutError:
-            print('Recieving packet timed out...')
+            print(f'\u001b[33m' + f'CoAP client| Recieving packet timed out...' + '\033[0m')
             return None
         else:
             # Decode & print packet

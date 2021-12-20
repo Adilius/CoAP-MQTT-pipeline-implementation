@@ -14,7 +14,7 @@ class temperature_resource(resource.Resource):
 
     async def render_get(self, request):
         payload = self.sensor.get_sensor_data()
-        print(f'CoAP server respond to GET /temperature with payload: {payload.decode()}')
+        print(f'\u001b[32m' +f'CoAP client| GET /temperature with payload: {payload.decode()}' + '\033[0m')
         return aiocoap.Message(payload=payload)
 
 async def main():
@@ -31,7 +31,7 @@ async def main():
 
 
 def run_server():
-    print("CoAP server running...")
+    print('\u001b[32m' +"CoAP server| Starting..." + '\033[0m')
 
     # logging setup
     logging.basicConfig(level=logging.INFO)
