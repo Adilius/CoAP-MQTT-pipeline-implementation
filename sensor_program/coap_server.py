@@ -6,6 +6,8 @@ import aiocoap
 
 from .sensor_data import sensor
 
+HOST = '127.0.0.1'
+PORT = 5683
 
 class temperature_resource(resource.Resource):
     def __init__(self):
@@ -24,14 +26,14 @@ async def main():
     root.add_resource(['temperature'], temperature_resource())
 
     # Binds context to all adresses on CoAP port
-    await aiocoap.Context.create_server_context(bind=('127.0.0.1',5683),site=root)
+    await aiocoap.Context.create_server_context(bind=(HOST,PORT),site=root)
 
     # Server loop
     await asyncio.get_running_loop().create_future()
 
 
 def run_server():
-    print('\u001b[32m' +"CoAP server| Starting..." + '\033[0m')
+    print('\u001b[32m' +f"CoAP server| Starting on port {PORT}" + '\033[0m')
 
     # logging setup
     logging.basicConfig(level=logging.INFO)

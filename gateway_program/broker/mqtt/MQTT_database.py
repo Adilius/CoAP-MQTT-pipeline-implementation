@@ -45,11 +45,13 @@ def write_database(database):
 def session_exists(client_ID: str):
 
     database = read_database()
-    clients_list = database.get('Clients')
-    for client in clients_list:
-        if client_ID in client:
-            return True
-    return False
+    try:
+        clients_list = database.get('Clients')
+        for client in clients_list:
+            if client_ID in client:
+                return True
+    except:
+        return False
 
 # Given client ID return session values
 def session_get(client_ID: str):

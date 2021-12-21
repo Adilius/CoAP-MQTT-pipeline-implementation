@@ -12,7 +12,7 @@ connected_clients = []
 
 
 def run_server():
-    print('\u001b[31m' +'MQTT Broker| Starting...' + '\033[0m')
+    print('\u001b[31m' +f'MQTT Broker| Starting on port {PORT}' + '\033[0m')
     main()
 
 
