@@ -13,16 +13,28 @@ def initialize_database():
 def read_database():
 
     database = None
+    try_count = 0
 
-    while database is None:
+    # Try to read database 10 times
+    while database is None and try_count < 10:
         try:
             # Read database file
             with open("db.json", "r") as db:
                 database = json.load(db)
+                return database
         except:
-            pass
+            try_count += 1
 
-    return database
+    # Otherwise recreate database and read again
+    delete_database()
+    initialize_database()
+    read_database()
+
+# Delete database
+def delete_database():
+    # Create database file
+    if os.path.exists("db.json"):
+        os.remove("db.json")
 
 # Write content to database file
 def write_database(database):
@@ -139,7 +151,7 @@ def session_remove_topic(client_ID: str, topic: str):
             try:
                 client_variables['Subscriptions'].remove(topic)
             except:
-                print(f'\u001b[31m' +f'Could not to remove subscription ({topic}) from client ({client_ID})' + '\033[0m')
+                print(f'\u001b[31m' +f'MQTT Broker| Could not to remove subscription ({topic}) from client ({client_ID})' + '\033[0m')
             clients_list[index][client_ID] = client_variables
 
     database.update({"Clients": clients_list})

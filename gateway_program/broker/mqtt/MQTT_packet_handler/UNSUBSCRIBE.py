@@ -18,7 +18,7 @@ def handle(incoming_packet: dict, client_ID):
     # remove topics from client
     for topic in topics:
         MQTT_database.session_remove_topic(client_ID, topic)
-        print(f'\u001b[31m' +f'Client ID ({client_ID}) unsubscribed to ({topic})' + '\033[0m')
+        print(f'\u001b[31m' +f'MQTT Broker| Client ID ({client_ID}) unsubscribed to ({topic})' + '\033[0m')
 
     # create packet
     outgoing_packet = UNSUBACK.encode(packet_identifier)

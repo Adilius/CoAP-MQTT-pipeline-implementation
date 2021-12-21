@@ -26,4 +26,3 @@ class client():
 
 def run_client():
     m_client = client('127.0.0.1', 1883, "temperature")
-    pass

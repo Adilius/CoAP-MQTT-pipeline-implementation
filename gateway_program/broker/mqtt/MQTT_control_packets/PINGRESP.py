@@ -24,7 +24,7 @@ def encode(client_ID: str):
         + packet_length
     )
 
-    print(f'\u001b[31m' +f'Responded to ({client_ID}) ping request.' + '\033[0m')
+    print(f'\u001b[31m' +f'MQTT Broker| Responded to ({client_ID}) ping request.' + '\033[0m')
 
     encoded_packet = int(packet, 2).to_bytes((len(packet) + 7) // 8, byteorder="big")
     return encoded_packet

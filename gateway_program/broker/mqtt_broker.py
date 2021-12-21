@@ -12,7 +12,7 @@ connected_clients = []
 
 
 def run_server():
-    print('\u001b[31m' +'MQTT broker| Starting...' + '\033[0m')
+    print('\u001b[31m' +'MQTT Broker| Starting...' + '\033[0m')
     main()
 
 
@@ -38,7 +38,7 @@ def start_broker():
         server_socket.bind((HOST, PORT))
         #print(f"Binding server socket to host: {HOST} and port: {PORT}")
     except:
-        print(f'\u001b[31m' +f"MQTT broker| Bind failed. \nError: {str(sys.exc_info())}" + '\033[0m')
+        print(f'\u001b[31m' +f"MQTT Broker| Bind failed. \nError: {str(sys.exc_info())}" + '\033[0m')
         sys.exit()
 
     # Enable passive listening sockets
@@ -56,13 +56,13 @@ def start_broker():
             # Wait and accept incoming connection
             (client_socket, address) = server_socket.accept()
             ip, port = str(address[0]), str(address[1])
-            print(f'\u001b[31m' +f"MQTT broker| Connection from {ip}:{port} has been established." + '\033[0m')
+            #print(f'\u001b[31m' +f"MQTT Broker| Connection from {ip}:{port} has been established." + '\033[0m')
 
             try:
                 Thread(target=client_thread, args=(client_socket, ip, port)).start()
-                print(f'\u001b[31m' +f"MQTT broker| Client thread for {ip}:{port} has been created." + '\033[0m')
+                #print(f'\u001b[31m' +f"MQTT Broker| Client thread for {ip}:{port} has been created." + '\033[0m')
             except:
-                print(f'\u001b[31m' +f"MQTT broker| Client thread for {ip}:{port} did not create" + '\033[0m')
+                print(f'\u001b[31m' +f"MQTT Broker| Client thread for {ip}:{port} did not create" + '\033[0m')
         except socket.timeout:
             pass
         except KeyboardInterrupt:
@@ -82,12 +82,12 @@ def client_thread(client_socket, ip, port):
             try:
                 data = client_socket.recv(1024)
             except:
-                print(f'\u001b[31m' +f'MQTT broker| Client ({client_ID}) unexpected disconnect.' + '\033[0m')
+                print(f'\u001b[31m' +f'MQTT Broker| Client ({client_ID}) unexpected disconnect.' + '\033[0m')
                 connected_clients = [client for client in connected_clients if client_ID not in client]
                 sys.exit()
             if not data:
                 time.sleep(0.5)
-                print(f'\u001b[31m' +f"MQTT broker| Client ({client_ID}) went to sleep" + '\033[0m')
+                print(f'\u001b[31m' +f"MQTT Broker| Client ({client_ID}) went to sleep" + '\033[0m')
                 break
 
             #print(f"Incomming packet: {data}")

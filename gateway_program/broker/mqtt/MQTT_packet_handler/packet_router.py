@@ -22,8 +22,8 @@ def route_packet(incoming_packet: dict, client_ID: str):
     elif packet_type == "PUBLISH":
         outgoing_packet = PUBLISH.handle(incoming_packet, client_ID)
     else:
-        print('\u001b[31m' +"Unknown packet:" + '\033[0m')
-        print('\u001b[31m' +"Exiting...." + '\033[0m')
+        print('\u001b[31m' +"MQTT Broker| Unknown packet:" + '\033[0m')
+        print('\u001b[31m' +"MQTT Broker| Exiting...." + '\033[0m')
         sys.exit()
     return outgoing_packet
     

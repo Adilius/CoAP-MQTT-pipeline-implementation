@@ -32,6 +32,6 @@ def handle(incoming_packet: dict, client_ID: str):
         else:
             outgoing_packet = CONNACK.encode(session_present=False, return_code=0)
     
-    print(f'\u001b[36m' +f'MQTT client| Client ID ({client_ID}) connected.' + '\033[0m')
+    print(f'\u001b[31m' +f'MQTT Broker| Client ID ({client_ID}) connected.' + '\033[0m')
 
     return outgoing_packet
