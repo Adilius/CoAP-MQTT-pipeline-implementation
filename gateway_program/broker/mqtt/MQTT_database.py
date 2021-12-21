@@ -26,8 +26,7 @@ def read_database():
             try_count += 1
 
     # Otherwise recreate database and read again
-    delete_database()
-    initialize_database()
+    recreate_database()
     read_database()
 
 # Delete database
@@ -35,6 +34,12 @@ def delete_database():
     # Create database file
     if os.path.exists("db.json"):
         os.remove("db.json")
+
+# Delete & create database
+def recreate_database():
+    delete_database()
+    initialize_database()
+    print('\u001b[31m' +f'MQTT Broker| Database recreated' + '\033[0m')
 
 # Write content to database file
 def write_database(database):

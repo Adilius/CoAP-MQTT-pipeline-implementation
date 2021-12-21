@@ -4,7 +4,7 @@ import time
 
 def run_client():
 
-    topic = 'temperature'
+    
     time.sleep(1)
 
     # Create CoAP client
@@ -19,6 +19,8 @@ def run_client():
     time.sleep(1)
 
     while True:
+
+        topic = 'temperature'
         try:
             # Get value from CoAP server
             value = c_client.request_value(topic)
@@ -35,5 +37,24 @@ def run_client():
         except:
             print(f'\u001b[36m' +f'MQTT client| Error sending sensor data' + '\033[0m')
 
+
+        time.sleep(6)  # Get and push new values to broker at this interval
+
+        topic = 'humidity'
+        try:
+            # Get value from CoAP server
+            value = c_client.request_value(topic)
+
+            # Decode from bytes to string
+            decoded_value = value[0].decode()
+        except:
+            print(f'\u001b[33m' + f'CoAP client| Error getting sensor data')
+
+
+        try:
+            # Send value to MQTT Broker
+            m_client.send_value(topic, decoded_value)
+        except:
+            print(f'\u001b[36m' +f'MQTT client| Error sending sensor data' + '\033[0m')
 
         time.sleep(6)  # Get and push new values to broker at this interval

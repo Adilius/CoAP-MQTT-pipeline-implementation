@@ -12,11 +12,21 @@ PORT = 5683
 class temperature_resource(resource.Resource):
     def __init__(self):
         super().__init__()
-        self.sensor = sensor()
+        self.sensor = sensor(mean=20, sigma=2, value=20)
 
     async def render_get(self, request):
         payload = self.sensor.get_sensor_data()
-        print(f'\u001b[32m' +f'CoAP client| GET /temperature with payload: {payload.decode()}' + '\033[0m')
+        print(f'\u001b[32m' +f'CoAP client| GET temperature with payload: {payload.decode()}' + '\033[0m')
+        return aiocoap.Message(payload=payload)
+
+class humidity_resource(resource.Resource):
+    def __init__(self):
+        super().__init__()
+        self.sensor = sensor(mean=40, sigma=5, value=20)
+
+    async def render_get(self, request):
+        payload = self.sensor.get_sensor_data()
+        print(f'\u001b[32m' +f'CoAP client| GET humidity with payload: {payload.decode()}' + '\033[0m')
         return aiocoap.Message(payload=payload)
 
 async def main():
@@ -24,6 +34,7 @@ async def main():
     # Resource tree creation
     root = resource.Site()
     root.add_resource(['temperature'], temperature_resource())
+    root.add_resource(['humidity'], humidity_resource())
 
     # Binds context to all adresses on CoAP port
     await aiocoap.Context.create_server_context(bind=(HOST,PORT),site=root)

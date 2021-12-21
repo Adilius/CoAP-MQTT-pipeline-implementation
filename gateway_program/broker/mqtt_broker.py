@@ -18,7 +18,7 @@ def run_server():
 
 def main():
     # Initialize database
-    MQTT_database.initialize_database()
+    MQTT_database.recreate_database()
 
     # Create dummy session and topic
     MQTT_database.topic_create('temperature')

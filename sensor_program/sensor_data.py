@@ -3,10 +3,10 @@ import random
 # Sensor class
 class sensor():
     # Initialize mean, sigma, and starting value of sensor generation
-    def __init__(self):
-        self.mean = 20
-        self.sigma = 2
-        self.value = 22
+    def __init__(self, mean, sigma, value):
+        self.mean = mean
+        self.sigma = sigma
+        self.value = value
 
     # Get a new sensor data
     def get_sensor_data(self):
