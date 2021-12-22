@@ -39,3 +39,6 @@ def run_client():
     cache_manager.recreate_cache()
     print(f'\u001b[35m' +f'MQTT Front | Cache created' + '\033[0m')
     m_client = client('127.0.0.1', 1883)
+
+if __name__ == "__main__":
+    run_client()
