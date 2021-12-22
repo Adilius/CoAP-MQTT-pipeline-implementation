@@ -32,8 +32,8 @@ def read_cache():
     while cache is None and try_count < 10:
         try:
             # Read cache file
-            with open("cache.json", "r") as db:
-                cache = json.load(db)
+            with open("cache.json", "r") as file:
+                cache = json.load(file)
                 return cache
         except:
             try_count += 1
@@ -41,3 +41,9 @@ def read_cache():
     # Otherwise recreate database and read again
     recreate_cache()
     read_cache()
+
+# Update cache
+def update_cache(topic, value):
+    cache = read_cache()
+    cache[topic] = value
+    write_cache(cache)

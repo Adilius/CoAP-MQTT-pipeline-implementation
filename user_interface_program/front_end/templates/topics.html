@@ -1,0 +1,17 @@
+
+  <div id="topics" class="topics">
+  <div class="row">
+
+      {% for key, value in topics.items() %}
+      <div class="col">
+        <div class="card">
+          <img class="card-img-top" src="https://via.placeholder.com/500/000000/FFFFFF/?text={{key}}">
+          <div class="card-body">
+            <h3 class="card-text text-dark">{{value}}</h3>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>

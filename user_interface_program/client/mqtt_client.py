@@ -8,8 +8,12 @@ topics = ['temperature','humidity']
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-    if msg.topic in topics:
-        print(f'\u001b[35m' +f'MQTT Front | New publish in {msg.topic}: {(msg.payload).decode()}' + '\033[0m')
+    topic = msg.topic
+    value = (msg.payload).decode()
+    if topic in topics:
+        print(f'\u001b[35m' +f'MQTT Front | New publish in {topic}: {value}' + '\033[0m')
+        cache_manager.update_cache(topic, value)
+        cache_manager.read_cache()
 
 class client():
     def __init__(self, ip_address, PORT):

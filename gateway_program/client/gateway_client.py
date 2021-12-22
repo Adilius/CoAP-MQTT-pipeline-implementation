@@ -38,7 +38,7 @@ def run_client():
             print(f'\u001b[36m' +f'MQTT client| Error sending sensor data' + '\033[0m')
 
 
-        time.sleep(6)  # Get and push new values to broker at this interval
+        time.sleep(5)  # Get and push new values to broker at this interval
 
         topic = 'humidity'
         try:
@@ -57,4 +57,4 @@ def run_client():
         except:
             print(f'\u001b[36m' +f'MQTT client| Error sending sensor data' + '\033[0m')
 
-        time.sleep(6)  # Get and push new values to broker at this interval
+        time.sleep(5)  # Get and push new values to broker at this interval
